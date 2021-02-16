@@ -1,0 +1,149 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Project3_FinalExam.ViewModels.AboutViewModel
+
+
+@{
+    ViewData["Title"] = "iSchool RIT ";
+}
+
+@section CSS {
+    <style>
+        .ex1 {
+            opacity: 0;
+        }
+
+            .ex1 span {
+                position: relative;
+                top: 10px;
+                left: 10px;
+                opacity: 0;
+            }
+
+        .ex2 {
+            opacity: 0;
+        }
+
+            .ex2 span {
+                position: relative;
+                left: -10px;
+                opacity: 0;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+    </style>
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Title</h1>
+</div>
+
+@*    class="container dark-grey" style="padding:128px 16px"
+*@
+
+<div id="fade" style=" margin: 0 50px;">
+
+
+    <div><img src="~/img/rit.jpg" /></div>
+    <div><img src="~/img/plaza.jpg" /></div>
+    <div><img src="~/img/rit3.jpg" /></div>
+    <div><img src="~/img/rit4.jpg" /></div>
+    <div><img src="~/img/rit5.jpg" /></div>
+    <div><img src="~/img/rit6.jpg" /></div>
+    <div><img src="~/img/rit7.jpg" /></div>
+    <div><img src="~/img/rit8.jpg" /></div>
+    <div><img src="~/img/rit9.jpg" /></div>
+    <div><img src="~/img/rit10.jpg" /></div>
+    <div><img src="~/img/rit11.jpg" /></div>
+    <div><img src="~/img/rit12.jpg" /></div>
+    <div><img src="~/img/rit13.jpg" /></div>
+    <div><img src="~/img/rit14.jpg" /></div>
+    <div><img src="~/img/rit15.jpg" /></div>
+    <div><img src="~/img/rit16.jpg" /></div>
+</div>
+<br>
+<br>
+<div id="particles-js" style="background: white; height: 100vh;">
+
+    <div class="align-middle" style=" position: absolute; top: 65%; padding-right: 50px; ">
+        <h5 class="text-justify" style="font-size: 20px;"><q>@Model.About[0].quote</q> </h5>
+        <h5>- @Model.About[0].quoteAuthor</h5>
+    </div>
+    <div class="align-middle" style=" position: absolute; top: 80%; padding-right: 50px;">
+        @*        <h5 class="text-justify" style="font-size: 20px;">@Model.About[0].description </h5>
+        *@
+        <h4 class="ex1">Overview</h4>
+        <p class="ex2 text-justify" style="font-size: 20px;">@Model.About[0].description </p>
+    </div>
+</div>
+
+@*<div>@Model.About[0].quoteAuthor</div>*@
+@*<div>@Model.About[0].description</div>
+*@
+<!--<div>@Model.About[0].title</div>
+<div>
+    <ul>
+        <li>This is the "View" for the "HomeController" "Index()" Action method.</li>
+        <li>In this view you should place the following:</li>
+        <li>A ViewData["Title"] appropriate to the page, see line 2, in the view "Index.cshtml" for the "HomeController".</li>
+        <li>A photograph, in an "img tag," of some aspect of RIT life or the campus</li>
+        <li>Some text information about RIT: use the "ist.rit.edu/api/about/" end point.</li>
+    </ul>
+</div>-->
+@*Get jQuery and jQueryUI Scripts from wwwroot*@
+@section Scripts {
+    <script src="~/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="~/jqueryui/themes/dark-hive/jquery-ui.min.css">
+    <script src="~/jqueryui/jquery-ui.js"></script>
+
+    <script src="~/particles.js/particles.js"></script>
+    <script src="~/lib/app.js"></script>
+    <script src="~/lib/textyle.min.js"></script>
+    <script src="~/lib/app.js"></script>
+
+
+    @*    <link rel="stylesheet" type="text/css" href="~/slick-carousel/slick.css" />
+    *@
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/slick-carousel/slick-theme.css" />
+    @*    <script type="text/javascript" src="~/slick-carousel/slick.min.js"></script>
+    *@
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#fade').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'ease-in-out',
+                autoplay: true,
+                autoplaySpeed: 2000,
+                centerMode: true,
+
+            });
+
+        });
+        $('.ex1').textyle();
+
+        $('.ex2').textyle({
+            duration: 400,
+            delay: 40,
+            easing: 'swing',
+            callback: function () {
+                $(this).css({
+                    color: 'coral',
+                    transition: '1s',
+                });
+                $('.desc').css('opacity', 1);
+            }
+        });
+    </script>
+}

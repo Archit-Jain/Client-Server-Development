@@ -1,0 +1,78 @@
+﻿@model Project3_FinalExam.ViewModels.MinorsViewModel
+@section CSS {
+    <style>
+        h2 {
+            color: #ff7f50;
+        }
+    </style>
+}
+<h2>@Model.Title</h2>
+
+<div id="myDegrees" class="myDegrees"></div>
+
+@foreach (var minor in Model.Minors)
+{
+    <div id="@String.Concat("myDegrees", minor.name)" class="myDegrees"></div>
+    <h3 id=@String.Concat("myHdng", minor.name)><b>@minor.title</b></h3>
+    <ul id=@String.Concat("myul", minor.name)>
+        <li><a href=@String.Concat("#myDesc", minor.name)>Description</a></li>
+        <li><a href=@String.Concat("#myCour", minor.name)>Courses</a></li>
+    </ul>
+    <div id=@String.Concat("myDiv", minor.name)>
+        <p id=@String.Concat("myPara", minor.name)>@minor.title</p>
+
+        <div id=@String.Concat("myDesc", minor.name)>
+            <p>@minor.description</p>
+        </div>
+        <div id=@String.Concat("myCour", minor.name)>
+            <ul>
+                @foreach (var conc in minor.courses)
+                {
+                    <li>@conc</li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    @*<div id=@String.Concat("myDiv", minor.name)>
+
+        </div>*@
+}
+@*Get jQuery and jQueryUI Scripts from wwwroot*@
+@section Scripts {
+    <script src="~/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="~/jqueryui/themes/ui-lightness/jquery-ui.min.css">
+    <script src="~/jqueryui/jquery-ui.js"></script>
+    <script>
+                // Create JqueryUi Tab
+        var minorData = @Html.Raw(Json.Serialize(Model.Minors));
+                let headings = document.querySelectorAll("h3");//ul
+               let list = document.querySelectorAll("[id^='myul']");//ul
+                @*let para = document.querySelectorAll("[id^='myPara']");//p
+                //div desc
+                let desc = document.querySelectorAll("[id^='myDesc']");
+
+                //div cour
+                let cour = document.querySelectorAll("[id^='myCour']");*@
+
+                let divs = document.querySelectorAll("[id^='myDiv']");
+
+
+                for (var i = 0; i < headings.length; i++) {
+                    $("#myDegrees" + minorData[i].name).append($("#" + headings[i].id));
+                    $("#myDegrees" + minorData[i].name).append($("#" + list[i].id));
+
+                    @*$("#myDegrees").append($("#" + para[i].id));
+                    $("#myDegrees").append($("#" + desc[i].id));
+
+                    $("#myDegrees").append($("#" + cour[i].id));*@
+                    $("#myDegrees" + minorData[i].name).append($("#" + divs[i].id));
+                }
+
+                $('.myDegrees').tabs({
+
+                    active: false,
+                    heightStyle: "content"
+                });
+    </script>
+}

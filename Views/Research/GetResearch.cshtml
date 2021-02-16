@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Project3_FinalExam.ViewModels.ResearchViewModel
+@section CSS {
+    <style>
+        h2 {
+            color: #ff7f50;
+        }
+    </style>
+}
+<h2>@Model.Title</h2>
+
+
+
+<div id="myResearch"></div>
+
+@foreach (var res in Model.Research)
+{
+    <h3 id=@String.Concat("myHdng", res.username)><b>@res.facultyName.ToUpper()</b></h3>
+
+    <div id=@String.Concat("myDiv", res.username)>
+        <p>@res.username.ToUpper()</p>
+        <p>Faculty Citations:</p>
+        <ul>
+            @foreach (var conc in @res.citations)
+            {
+                <li>@conc</li>
+
+            }
+        </ul>
+    </div>
+}
+@*Get jQuery and jQueryUI Scripts from wwwroot*@
+@section Scripts {
+    <script src="~/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="~/jqueryui/themes/ui-lightness/jquery-ui.min.css">
+    <script src="~/jqueryui/jquery-ui.js"></script>
+    <script>
+        // Create Accordion
+        let headings = document.querySelectorAll("h3");
+        let divs = document.querySelectorAll("[id^='myDiv']");
+
+        for (var i = 0; i < headings.length; i++) {
+            $("#myResearch").append($("#" + headings[i].id));
+            $("#myResearch").append($("#" + divs[i].id));
+        }
+
+        $('#myResearch').accordion({
+            collapsible: true,
+            active: false,
+            heightStyle: "content"
+        });
+    </script>
+}
